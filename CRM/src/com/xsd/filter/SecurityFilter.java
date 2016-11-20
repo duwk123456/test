@@ -34,7 +34,7 @@ public class SecurityFilter implements Filter {
 	private List<String> exemptions = new ArrayList<String>();
 	private static Logger logger = Logger.getLogger(SecurityFilter.class);
 	public void destroy() {
-
+		System.out.println("123");
 	}
 
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
