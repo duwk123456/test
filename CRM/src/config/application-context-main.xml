@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+	<import resource="application-context-db.xml" />
+	
+
+	
+	
+	
+	<!-- <import resource="application-flowmgr.xml" />
+	<import resource="application-flowtrace.xml" />
+	<import resource="application-server.xml" />
+
+	DINGXH START
+	<import resource="application-eccustomers.xml" />
+	<import resource="application-tfinstance.xml" />
+	<import resource="application-voucherif.xml" />
+	DINGXH END
+
+	chenyp start
+	<import resource="application-sysmgr.xml" />
+	<import resource="application-dictmgr.xml" />
+	<import resource="application-quickmarkmgr.xml" />
+	<import resource="application-instanceabnormalmgr.xml" />
+	chenyp end
+
+	tu
+	<import resource="application-publicfaq.xml" />
+	<import resource="application-context-email.xml" />
+
+	map
+	<import resource="application-gis.xml" />
+	cache
+	<import resource="application-context-cache.xml" />
+	<import resource="application-sktsvc.xml" />
+
+	quartz
+	<import resource="application-context-quartz.xml" />
+
+
+	greenHouse
+	<import resource="application-greenHouse.xml" />
+	水蜜桃
+	<import resource="application-peach.xml" />
+	微信接口
+	<import resource="application-weiXin.xml" />
+	二维码接口
+	<import resource="application-vouchermgr.xml" />
+	farm trace source
+	<import resource="application-farm.xml" />
+	引入 xml配置文件 <import resource="application-context-dao.xml"/> <import 
+		resource="application-context-manager.xml"/> <import resource="application-context-controller.xml"/>
+
+	<bean id="CallController" class="com.newland.portalmgr.common.CallController">
+		<property name="printJSONView" value="/common/printjson"></property>
+	</bean>
+
+	作业接口
+	<import resource="application-workmgr.xml" />
+	<import resource="application-context-exception.xml"/>
+    <import resource="application-enterprise.xml"/>
+    
+    
+   
+    客户信息
+    <import resource="application-customer.xml"/>
+
+
+    配送管理 
+    <import resource="application-dispatch.xml"/>
+  
+    <import resource="application-order.xml"/>
+    <import resource="application-plan.xml"/>
+    
+    <import resource="application-dispatchPlan.xml"/>
+    
+    <import resource="application-envir.xml"/>
+
+	套餐管理
+	<import resource="application-goods.xml"/>
+	
+	<bean id="SpringContext" class="com.newland.portalmgr.common.SpringContext"/>
+	
+	预警
+	
+    <import resource="application-alarm.xml"/> 
+	<import resource="application-alarm-quartz.xml"/> 
+	专家互动
+	<import resource="application-expert.xml" />
+	咨询发布
+	<import resource="application-news.xml" />
+	
+	监控大屏
+	<import resource="application-monitorScreen.xml" />
+	二维码赋码管理
+	<import resource="application-dimensionalCode.xml" />
+	企业电子地图
+	<import resource="application-emap.xml"/>
+	
+	数据中心
+	<import resource="application-datacenter.xml"/> -->
+</beans>
