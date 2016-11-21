@@ -4,5 +4,23 @@
     <select id="findAllUser" resultType="UserInfo">
         select * from userinfo 
     </select>
+    
+    <select id="findUser" resultType="UserInfo" parameterType="UserInfo">
+        select * from userinfo where 1=1 
+        <if test="userName !='' and userName !=null">
+             and user_name=#{userName}
+        </if>
+        <if test="userId !='' and userId !=null">
+             and user_id=#{userId}
+        </if>
+    </select>
+    
+    <update id="updateUser" parameterType="UserInfo">
+   	   update UserInfo set password=#{password} where user_id=#{userId}
+    </update>
+    
+    <insert id="addUser" parameterType="UserInfo">
+    	INSERT INTO `userinfo` ( `user_name`, `password`) VALUES (#{userName}, #{password})
+    </insert>
    
 </mapper>

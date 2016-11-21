@@ -14,6 +14,28 @@ import com.xsd.portalmgr.sys.entity.UserInfo;
 public interface UserDao {
 	
 	 List<UserInfo> findAllUser();
+
+	/**
+	 *@author duwk 
+	 *@date  2016-11-21 
+	 * @param userInfo
+	 * @return
+	 */
+	UserInfo findUser(UserInfo userInfo);
+
+	/**
+	 *@author duwk 
+	 *@date  2016-11-21 
+	 * @param existUser
+	 */
+	void updateUser(UserInfo existUser);
+
+	/**
+	 *@author duwk 
+	 *@date  2016-11-21 
+	 * @param userInfo
+	 */
+	void addUser(UserInfo userInfo);
 	
 
 }

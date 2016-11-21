@@ -22,12 +22,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <script type="text/javascript">
     	$(function(){
+    	
     		
-    		$.post(_home+"/duwk/hello.forward",null,function(data){
-    			console.log(data.results.success);
-    		},"json")
+    		$("#btn").click(function(){
+    			var param={};
+    			param.userName=$("#userName").val();
+    			param.password=$("#password").val();
+    			param.vcode=$("#vcode").val();
+    			console.log(param);
+        		$.post(_home+"/system/regUser.forward",param,function(data){
+        			console.log(data.results.success);
+        		},"json")	
+    		})
     		
+    		
+    		
+    		$("getCode").click(function(){
+    			var path = $(this).attr("src");
+        		$(this).attr("src",path+"?date="+new Date());
+    		})	
     	})
+
+    	
+    	
+    
+    	
     </script>
     
     
@@ -37,7 +56,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
   <body>
-    This is my JSP <br>
+    
+    userName:<input type="text" name="userName" id="userName">
+    password:<input type="text" name="password" id="password">
+    vcode:<input type="text" name="vcode"  id="vcode"   >
+
+    <img alt="验证码" src="<%=request.getContextPath()%>/getCode"  onclick="refresh(this)" id="getCode" >
+    
+    
+    <input type="button" id="btn"  name="btn" value="提交">
     <img alt="xxx" src="<%=request.getContextPath()%>/images/webIco.png">
+    
   </body>
 </html>

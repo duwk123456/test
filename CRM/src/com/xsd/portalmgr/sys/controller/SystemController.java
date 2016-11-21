@@ -44,25 +44,148 @@ public class SystemController extends BaseController {
 	public void  helloWorld(HttpServletRequest request,HttpServletResponse response){
 	    ResultEntity resultEntity = new ResultEntity();
 	    try{
-	    
 	    	System.out.println("hello");
 			List<UserInfo> user  = userService.findUser();
-			
 			DictDef dictDef=	DictDefUtil.getDictDefEntity("1001", "100101","1");
-			
-			System.out.println(dictDef.getClassName());
-			
 			resultEntity.setMsg("查询成功");
 			resultEntity.setSuccess(true);
 			resultEntity.setObject(user);
 			GsonTools.writeJsonObj(response, resultEntity);
 	    }catch(Exception e){
-	    	e.printStackTrace();
-	    	
+	    	e.printStackTrace();	
 	    }
 	
 	    
 	}
+	
+	
+	
+	
+	@RequestMapping(value="/login")
+	public void  login(HttpServletRequest request,HttpServletResponse response,UserInfo userInfo){
+	    ResultEntity resultEntity = new ResultEntity();
+	    try{
+			int code =userService.loginSys(request, userInfo);
+			switch (code) {
+			case 1:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(true);
+				resultEntity.setMsg("验证通过");
+				break;			
+		   case 2:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("验证码错误,请重新输入");
+				break;
+		   case 3:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("户名或密码不正确，请重新输入");
+				break;
+		   case 4:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("服务异常");
+				break;
+			default:
+				break;
+			}
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	resultEntity.setProperty("code", 4);
+			resultEntity.setSuccess(false);
+			resultEntity.setMsg("服务异常");
+	    }
+		GsonTools.writeJsonObj(response, resultEntity);
+	    
+	}
+	
+	
+	
+	@RequestMapping(value="/modifyPwd")
+	public void  modifyPwd(HttpServletRequest request,HttpServletResponse response,UserInfo userInfo){
+	    ResultEntity resultEntity = new ResultEntity();
+	    try{
+	    	
+			int code =userService.modifyPwd(request, userInfo);
+			switch (code) {
+			 case 1:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(true);
+				resultEntity.setMsg("密码修改成功");
+				break;	
+		     case 2:
+	    	    resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("服务异常");
+				break;
+		     case 3:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("用户不存在");
+				break;
+		     case 4:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("原密码错误,请重新输入");
+				break;
+
+			 default:
+				break;
+			}
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	resultEntity.setProperty("code", 5);
+			resultEntity.setSuccess(false);
+			resultEntity.setMsg("服务异常");
+	    }
+		GsonTools.writeJsonObj(response, resultEntity);
+	    
+	}
+	
+	
+	
+	@RequestMapping(value="/regUser")
+	public void  regUser(HttpServletRequest request,HttpServletResponse response,UserInfo userInfo){
+	    ResultEntity resultEntity = new ResultEntity();
+	    try{
+	    	
+			int code =userService.regUser(userInfo);
+			switch (code) {
+			 case 1:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(true);
+				resultEntity.setMsg("密码修改成功");
+				break;	
+		     case 2:
+	    	    resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("服务异常");
+				break;
+		     case 3:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("用户不存在");
+				break;
+		     case 4:
+				resultEntity.setProperty("code", code);
+				resultEntity.setSuccess(false);
+				resultEntity.setMsg("原密码错误,请重新输入");
+				break;
+
+			 default:
+				break;
+			}
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	resultEntity.setProperty("code", 5);
+			resultEntity.setSuccess(false);
+			resultEntity.setMsg("服务异常");
+	    }
+		GsonTools.writeJsonObj(response, resultEntity);
+	    
+	}
+	
 	
 
 }
