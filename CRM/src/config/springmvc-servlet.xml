@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation=" 
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/mvc 
+           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byType">
+
+ 	<context:annotation-config/>
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+	<context:component-scan base-package="com.xsd.portalmgr"/>
+
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize">
+            <value>104857600</value>
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
+    <!-- 拦截器 -->
+<!--     <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/weiXin/*.forward"/>
+            <bean class="com.newland.portalmgr.common.interceptor.WeiXinInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors> -->
+    <!-- 视图解析器 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+ 	<bean id="DictDefUtil" class="com.xsd.portalmgr.util.DictDefUtil"
+		init-method="initialize" lazy-init="false">
+	<!-- 	<property name="dictDefMgrManager" ref="dictDefManager"></property> -->
+	</bean>
+
+
+<!--     <bean id="simpleMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                流程管理模块
+                <prop key="/**/portalmgr/flowmgr/*.forward">flowMgrController</prop>
+                流程追溯模块
+                <prop key="/**/portalmgr/flowtrace/*.forward">flowTraceController</prop>
+                流程录入（弱校验流程）
+                <prop key="/**/portalmgr/flowinput/*.forward">flowInputCtl</prop>
+                DINGXH START
+                企业相关模块
+                <prop key="/**/portalmgr/ecmgr/*.forward">ecCtrl</prop>
+                <prop key="/**/portalmgr/eccustomers/*.forward">ecCtrl</prop>
+                流程实例相关模块
+                <prop key="/**/portalmgr/flowcreater/*.forward">tfInstanceCtrl</prop>
+                DINGXH END
+
+                CHENYP START
+                <prop key="/**/portalmgr/iamgr/instanceAbnormalMgr/*.forward">instanceAbnormalMgrController</prop>
+                <prop key="/**/portalmgr/quickmarkmgr/quickMarkMgr/*.forward">quickMarkMgrController</prop>
+                <prop key="/**/portalmgr/quickmarkmgr/templateMgr/*.forward">templateMgrController</prop>
+                <prop key="/**/portalmgr/dictmgr/dictMgr/*.forward">dictMgrController</prop>
+                <prop key="/**/portalmgr/sysmgr/dictDefMgr/*.forward">dictDefController</prop>
+                <prop key="/**/portalmgr/sysmgr/bulletinMgr/*.forward">bulletinMgrController</prop>
+                CHENYP END
+
+                <prop key="/**/portalmgr/sysmgr/grouponManagerController/*.forward">grouponManagerController</prop>
+                <prop key="/**/portalmgr/sysmgr/organManage/*.forward">organManageController</prop>
+
+                <prop key="/**/portalmgr/sysmgr/roleMgrController/*.forward">roleMgrController</prop>
+                <prop key="/**/portalmgr/sysmgr/smResourceController/*.forward">smResourceController</prop>
+                <prop key="/**/portalmgr/sysmgr/logController/*.forward">logController</prop>
+                <prop key="/**/*.forward">loginController</prop>
+                <prop key="/**/portalmgr/sysmgr/dictdefmgr/*.forward">dictDefController</prop>
+                <prop key="/**/portalmgr/comm/*.forward">CallController</prop>
+                <prop key="/**/um/dbMonitorController/*.fordword">dbMonitorController</prop>
+                <prop key="/**/um/hostMonitorController/*.fordword">hostMonitorController</prop>
+                公共部分追溯码查询
+                <prop key="/**/public/publicTlowTraceController/*.forward">publicTlowTraceController</prop>
+                <prop key="/**/public/publicUserFaqController/*.forward">publicUserFaqController</prop>
+                <prop key="/**/public/publicRegistController/*.forward">publicRegistController</prop>
+                <prop key="/**/userInfoManageController/*.forward">userInfoManageController</prop>
+
+                提供给 安卓客户端的服务
+                <prop key="/**/client/*.forward">serviceController</prop>
+                map
+                <prop key="/**/gis/*.forward">gisController</prop>
+                greenHouse 
+                <prop key="/**/greenHouse/*.forward">greenHouseController</prop>
+                <prop key="/**/sensorData/*.forward">sensorDataController</prop>
+                <prop key="/**/collector/*.forward">collectorController</prop>
+                车辆管理
+                <prop key="/**/portalmgr/carinfo/carInfoManagerController/*.forward">carInfoManagerController</prop>
+                水蜜桃
+                <prop key="/**/peach/*.forward">peachController</prop>
+                微信接口
+                <prop key="/**/weiXin/*.forward">weiXinController</prop>
+                PDA接口
+                <prop key="/**/pda/*.forward">PdaController</prop>
+                二维码接口
+                <prop key="/**/voucherMgr/*.forward">VoucherController</prop>
+                farm trace source
+                <prop key="/**/farm/*.forward">farmController</prop>
+
+                作业接口
+                <prop key="/**/portalmgr/work/*.forward">workMgrController</prop>
+                <prop key="/**/portalmgr/workHistory/*.forward">workHistoryMgrController</prop>
+                <prop key="/**/portalmgr/workConfig/*.forward">workConfigMgrController</prop>
+                <prop key="/**/portalmgr/ecDictDef/*.forward">ecDictDefController</prop>
+
+
+                企业管理模块
+                <prop key="/**/enterprise/*.forward">enterpriseController</prop>
+                农资管理
+                <prop key="/**/material/*.forward">materialController</prop>
+                 客户管理
+                <prop key="/**/customer/*.forward">customerController</prop>
+                  配送明细管理
+                <prop key="/**/dispatch/*.forward">dispatchController</prop>
+                  订单管理  
+                <prop key="/**/order/*.forward">orderManageController</prop>
+                  采摘计划
+                <prop key="/**/plan/*.forward">planPickController</prop>
+                  配送计划管理
+                <prop key="/**/dispatchPlan/*.forward">dispatchPlanController</prop>
+                 环境监控
+                <prop key="/**/envirController/*.forward">envirController</prop>
+                套餐管理
+                <prop key="/**/goods/*.forward">goodsManageController</prop>
+                物联网管理
+                <prop key="/**/farmlandEquip/*.forward">farmEquipController</prop>
+                专家互动 
+                <prop key="/**/expert/*.forward">expertController</prop>
+                专家管理 
+                <prop key="/**/expertManage/*.forward">expertManageController</prop>
+                咨询共享 
+                <prop key="/**/news/*.forward">newsController</prop>
+                监控大屏
+                <prop key="/**/monitorScreen/*.forward">monitorScreenController</prop>
+                <prop key="/**/dimensionalCode/*.forward">dimensionalCodeController</prop>
+                企业电子地图
+                <prop key="/**/emap/*.forward">emapController</prop>
+                
+                土地作物报表
+                <prop key="/**/landPlanting/*.forward">landPlantingController</prop>
+            </props>
+        </property>
+        <property name="interceptors">
+            <list>
+                <ref bean="authorizeInterceptor"/>
+            </list>
+        </property>
+    </bean> -->
+
+    <!-- 服务端的单独配置 -->
+</beans>
